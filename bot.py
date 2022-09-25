@@ -17,10 +17,13 @@ async def send_welcome(message: types.Message):
     await message.reply("Salom Men Hozircha Google orqali tarjima qila olaman")
 
 
+@dp.message_handler()
+async def code(message="admin"):
+    await message.reply("aristocratdev.t.me`")
 
 @dp.message_handler()
 async def tarjimon(message: types.Message):
-    user_msg = types.Message
+    user_msg = message.text
     send_msg = Translator.translate(user_msg, dest='en')
     await message.reply(send_msg)
 
