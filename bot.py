@@ -1,8 +1,8 @@
 import logging
-
+from googletrans import Translator
 from aiogram import Bot, Dispatcher, executor, types
 
-API_TOKEN = 'BOT TOKEN HERE'
+API_TOKEN = '5347442866:AAHHXVNR2L_VFFaIR7ejq43yPXhmR_fmJ9c'
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -12,18 +12,18 @@ bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
 
-@dp.message_handler(commands=['start', 'help'])
+@dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
-    await message.reply("Hi!\nI'm EchoBot!\nPowered by aiogram.")
+    await message.reply("Salom Men Hozircha Google orqali tarjima qila olaman")
 
 
 
 @dp.message_handler()
-async def echo(message: types.Message):
-    # old style:
-    # await bot.send_message(message.chat.id, message.text)
+async def tarjimon(message: types.Message):
+    user_msg = types.Message
+    send_msg = Translator.translate(user_msg, dest='en')
+    await message.reply(send_msg)
 
-    await message.answer(message.text)
 
 
 if __name__ == '__main__':
