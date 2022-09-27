@@ -26,7 +26,7 @@ def getDefinitions(word_id):
 
 if __name__ == '__main__':
     from pprint import pprint as print
-    print(getDefinitions("usa"))
+    print(getDefinitions("america"))
 
 
 
