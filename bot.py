@@ -1,7 +1,9 @@
 import logging
 from googletrans import Translator
 from aiogram import Bot, Dispatcher, executor, types
+from oxford import getDefinitions
 
+translater = Translator()
 API_TOKEN = '5347442866:AAHHXVNR2L_VFFaIR7ejq43yPXhmR_fmJ9c'
 
 # Configure logging
@@ -17,15 +19,16 @@ async def send_welcome(message: types.Message):
     await message.reply("Salom Men Hozircha Google orqali tarjima qila olaman")
 
 
-@dp.message_handler()
-async def code(message="admin"):
-    await message.reply("aristocratdev.t.me`")
+# @dp.message_handler()
+# async def code(message="admin"):
+#     await message.reply("aristocratdev.t.me")
 
 @dp.message_handler()
 async def tarjimon(message: types.Message):
-    user_msg = message.text
-    send_msg = Translator.translate(user_msg, dest='en')
-    await message.reply(send_msg)
+    lang = translater.detect(message.text).lang
+    if len(message.text.split()) > 2:
+        dest='uz' if lang == "en" else 'en'
+    await message.reply(translater.translate(message.text, dest="uz").text)
 
 
 
