@@ -16,12 +16,11 @@ dp = Dispatcher(bot)
 
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
-    await message.reply("Salom Men Hozircha Google orqali tarjima qila olaman")
+    await message.answer("Salom orqali gaplarni tarjima qilishingiz so`zlar haqida ma'lumotlar olishingiz mumkin va inglizcha ko`p so`zlarni qanday talafuz qilinishini o`rganishingiz mumkin")
 
-
-# @dp.message_handler()
-# async def code(message="admin"):
-#     await message.reply("aristocratdev.t.me")
+@dp.message_handler(commands=['help'])
+async def send_welcome(message: types.Message):
+     await message.answer("/start botni yangilash\nbitta inglizcha so`z yubirish orqali u so`z haiqda malumot yoki bitta inglizchadan boshqa tilda so`z yuborish orqali u haqida malumot ola olmasligizngiz mumkin chunki api manbasi inglizvha bo`lgani uchun biz siz yuborgan so`zni ingliz tiliga tarjima qilamiz.\n⚠️Maslahat: So`z haqida ma`lumot olish uchun inglizcha so`z yuboring\n2va undan orqtiq xabar yuborsangiz. masalan o`zbekcha xabrni inglizchaga inglizcha xabarni o`zbek tiligi tarjima qilishi mumkin.\n👨‍💻admin: aristocratdev.t.me")
 
 @dp.message_handler()
 async def tarjimon(message: types.Message):
@@ -43,8 +42,6 @@ async def tarjimon(message: types.Message):
             await message.reply("Bunday Soz")
 
    
-
-
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
