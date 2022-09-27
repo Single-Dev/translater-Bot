@@ -10,9 +10,24 @@ def Lugat(word_id):
     url = "https://od-api.oxforddictionaries.com:443/api/v2/entries/" + language + "/" + word_id.lower()
     r = requests.get(url, headers={"app_id": app_id, "app_key": app_key}) 
     res = r.json()
+    # print(res)
     if 'error' in res.keys():
         return False
     output = {}
     senses = res['results'][0]['lexicalEntries'][0]['entries'][0]['senses'][0]
-    print(senses)
-Lugat("Hello")
+    definitons = []
+    if sense in senses:
+        definitons.append(f"{sense['definitons'][0]}")
+    output['definitons'] = "\n".join(definitons)
+
+    if res['results'][0]['lexicalEntries'][0]['entries'][0]['pronunciations'][0].get['audioFile']:
+        output['audio'] = res['results'][0]['lexicalEntries'][0]['entries'][0]['pronunciations'][0]['audioFile']
+    return output
+
+if __name__ == '__main__':
+    print(Lugat("america"))
+
+
+
+
+
