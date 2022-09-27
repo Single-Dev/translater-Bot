@@ -26,7 +26,7 @@ async def send_welcome(message: types.Message):
 @dp.message_handler()
 async def tarjimon(message: types.Message):
     lang = translater.detect(message.text).lang
-    if len(message.text.split()) > 2:
+    if len(message.text.split()) >= 2:
         dest='uz' if lang == "en" else 'en'
         await message.reply(translater.translate(message.text, dest).text)
     else:
