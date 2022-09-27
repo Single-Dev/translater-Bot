@@ -16,16 +16,17 @@ dp = Dispatcher(bot)
 
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
-    await message.answer("Salom orqali gaplarni tarjima qilishingiz so`zlar haqida ma'lumotlar olishingiz mumkin va inglizcha ko`p so`zlarni qanday talafuz qilinishini o`rganishingiz mumkin")
+    await message.answer("Salom orqali gaplarni tarjima qilishingiz so`zlar haqida ma'lumotlar olishingiz mumkin va inglizcha ko`p so`zlarni qanday talafuz qilinishini ham o`rganishingiz mumkin")
 
 @dp.message_handler(commands=['help'])
 async def send_welcome(message: types.Message):
-     await message.answer("/start botni yangilash\nbitta inglizcha so`z yubirish orqali u so`z haiqda malumot yoki bitta inglizchadan boshqa tilda so`z yuborish orqali u haqida malumot ola olmasligizngiz mumkin chunki api manbasi inglizvha bo`lgani uchun biz siz yuborgan so`zni ingliz tiliga tarjima qilamiz.\n⚠️Maslahat: So`z haqida ma`lumot olish uchun inglizcha so`z yuboring\n2va undan orqtiq xabar yuborsangiz. masalan o`zbekcha xabrni inglizchaga inglizcha xabarni o`zbek tiligi tarjima qilishi mumkin.\n👨‍💻admin: aristocratdev.t.me")
+     await message.answer("/start botni yangilash\nbitta inglizcha so`z yubirish orqali u so`z haqida malumot olishingiz mumkin yoki inglizchadan boshqa tilda so`z yuborish orqali u haqida malumot ola olmasligizngiz mumkin chunki biz siz yuborgan so`zni ingliz tiliga tarjima qilamiz va u haqda ma'lumot qidiramiz.\n⚠️Maslahat: So`z haqida ma`lumot olish uchun inglizcha so`z yuboring\n2 va undan orqtiq xabar yuborsangiz, masalan: o`zbekcha xabarni inglizchaga inglizcha xabarni o`zbek tiligi tarjima qilishi mumkin.\nBot muammolarini bizga yuborsangiz biz sizdan xursand bo`lamiz\n👨‍💻admin: aristocratdev.t.me")
+
 
 @dp.message_handler()
 async def tarjimon(message: types.Message):
     lang = translater.detect(message.text).lang
-    if len(message.text.split()) >= 2:
+    if len(message.text.split()) > 2:
         dest='uz' if lang == "en" else 'en'
         await message.reply(translater.translate(message.text, dest).text)
     else:
