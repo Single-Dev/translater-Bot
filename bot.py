@@ -26,21 +26,21 @@ async def send_welcome(message: types.Message):
 @dp.message_handler()
 async def tarjimon(message: types.Message):
     lang = translater.detect(message.text).lang
-    if len(message.text.split()) > 2:
+    if len(message.text.split()) >= 2:
         dest='uz' if lang == "en" else 'en'
-    await message.reply(translater.translate(message.text, dest).text)
-    # else:
-    #     if lang == "en":
-    #         word_id = message.text
-    #     else:
-    #         word_id = translater.translate(message.text, dest='en').text
-    #         lookup = getDefinitions(word_id)
-    #     if lookup:
-    #         sender_msg = f"word: {word_id} \n Defenition: \n {lookup['definitions']}"
-    #         if lookup.get("audio"):
-    #             sender_msg = lookup['audio']
-    #     else:
-    #         sender_msg = "Bunday Soz"
+        await message.reply(translater.translate(message.text, dest).text)
+    else:
+        if lang == "en":
+            word_id = message.text
+        else:
+            word_id = translater.translate(message.text, dest='en').text
+        lookup = getDefinitions(word_id)
+        if lookup:
+            await message.reply(f"word: {word_id} \n Defenition: \n {lookup['definitions']}")
+            if lookup.get("audio"):
+                await message.reply(lookup['audio'])
+        else:
+            await message.reply("Bunday Soz")
 
    
 
