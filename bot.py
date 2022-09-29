@@ -5,7 +5,7 @@ from oxford import getDefinitions
 
 translater = Translator()
 API_TOKEN = '5347442866:AAHHXVNR2L_VFFaIR7ejq43yPXhmR_fmJ9c'
-# API_TOKEN = '5401595436:AAEvFO1a0z7Xv2AN6hV0VWJU4XTuKEulYF4'
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -25,6 +25,7 @@ async def send_welcome(message: types.Message):
 
 @dp.message_handler(commands=['settings'])
 async def send_welcome(message: types.Message):
+    
     await message.answer("")
 
 @dp.message_handler()
@@ -40,12 +41,14 @@ async def tarjimon(message: types.Message):
             word_id = translater.translate(message.text, dest='en').text
         lookup = getDefinitions(word_id)
         if lookup:
-            await message.reply(f"word: {word_id}\nInglizchasi:\n{lookup['definitions']}\n")
-            await message.reply(f"O`zbekchasi:\n {translater.translate(lookup['definitions'], dest='uz' ).text}")
+            if lang == "en":
+                await message.reply(f"word: {word_id}\nDefinitions:\n{lookup['definitions']}\n")
+            if lang == "uz":
+                await message.reply(f"so`z: {word_id}\nMa'lumotlar:\n{translater.translate(lookup['definitions'], dest='uz' ).text}\n")
             if lookup.get("audio"):
                 await message.reply_voice(lookup['audio'])
         else:
-            await message.reply(f"qidirligan so`z: {word_id}\nBunday Soz Topilmadi ✌️😕 \n Maslahat: Siz bunday degan bo`lishingiz mumkin 'cars' aslida 'car' orqali topasiz.")
+            await message.reply(f"qidirligan so`z: {word_id}\nBunday Soz Topilmadi 😕 \nSiz bunday degan bo`lishingiz mumkin 'cars' aslida 'car' orqali topasiz.")
 
    
 
