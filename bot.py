@@ -5,6 +5,7 @@ from oxford import getDefinitions
 
 translater = Translator()
 API_TOKEN = '5347442866:AAHHXVNR2L_VFFaIR7ejq43yPXhmR_fmJ9c'
+# API_TOKEN = '5401595436:AAEvFO1a0z7Xv2AN6hV0VWJU4XTuKEulYF4'
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -22,6 +23,9 @@ async def send_welcome(message: types.Message):
 async def send_welcome(message: types.Message):
      await message.answer("/start botni yangilash\nbitta inglizcha so`z yubirish orqali u so`z haqida malumot olishingiz mumkin yoki inglizchadan boshqa tilda so`z yuborish orqali u haqida malumot ola olmasligizngiz mumkin chunki biz siz yuborgan so`zni ingliz tiliga tarjima qilamiz va u haqda ma'lumot qidiramiz.\n⚠️Maslahat: So`z haqida ma`lumot olish uchun inglizcha so`z yuboring\n2 va undan orqtiq xabar yuborsangiz, masalan: o`zbekcha xabarni inglizchaga inglizcha xabarni o`zbek tiligi tarjima qilishi mumkin.\nBot muammolarini bizga yuborsangiz biz sizdan xursand bo`lamiz\n👨‍💻admin: aristocratdev.t.me")
 
+@dp.message_handler(commands=['settings'])
+async def send_welcome(message: types.Message):
+    await message.answer("")
 
 @dp.message_handler()
 async def tarjimon(message: types.Message):
@@ -36,11 +40,12 @@ async def tarjimon(message: types.Message):
             word_id = translater.translate(message.text, dest='en').text
         lookup = getDefinitions(word_id)
         if lookup:
-            await message.reply(f"word: {word_id}\nDefenition:\n{lookup['definitions']}")
+            await message.reply(f"word: {word_id}\nInglizchasi:\n{lookup['definitions']}\n")
+            await message.reply(f"O`zbekchasi:\n {translater.translate(lookup['definitions'], dest='uz' ).text}")
             if lookup.get("audio"):
                 await message.reply_voice(lookup['audio'])
         else:
-            await message.reply(f"qidirligan so`z: {word_id}\nBunday Soz Topilmadi ✌️😕")
+            await message.reply(f"qidirligan so`z: {word_id}\nBunday Soz Topilmadi ✌️😕 \n Maslahat: Siz bunday degan bo`lishingiz mumkin 'cars' aslida 'car' orqali topasiz.")
 
    
 
