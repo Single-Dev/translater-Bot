@@ -1,5 +1,6 @@
 import logging
 import hashlib
+from time import sleep
 from traceback import print_tb
 from googletrans import Translator
 from aiogram import Bot, Dispatcher, executor, types
@@ -21,6 +22,10 @@ dp = Dispatcher(bot)
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
     await message.answer("Salom bu bot orqali gaplarni tarjima qilishingiz so`zlar haqida ma'lumotlar olishingiz mumkin va inglizcha ko`p so`zlarni qanday talafuz qilinishini ham o`rganishingiz mumkin")
+    mb=100
+    for i in range(mb):
+        sleep(0.5)
+        await message.answer(f"{i/mb*100:.1f} % shuncha yuklandi.", end=message.delete)
 
 @dp.message_handler(commands=['help'])
 async def send_welcome(message: types.Message):
