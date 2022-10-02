@@ -1,11 +1,13 @@
 import logging
+import hashlib
 from googletrans import Translator
 from aiogram import Bot, Dispatcher, executor, types
 from oxford import getDefinitions
+from aiogram.types import InlineQuery, InputTextMessageContent, InlineQueryResultArticle
 
 translater = Translator()
-API_TOKEN = '5347442866:AAHHXVNR2L_VFFaIR7ejq43yPXhmR_fmJ9c'
-
+# API_TOKEN = '5347442866:AAHHXVNR2L_VFFaIR7ejq43yPXhmR_fmJ9c'
+API_TOKEN = '5401595436:AAEvFO1a0z7Xv2AN6hV0VWJU4XTuKEulYF4'
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -50,6 +52,22 @@ async def tarjimon(message: types.Message):
         else:
             await message.reply(f"qidirligan so`z: {word_id}\nBunday Soz Topilmadi 😕 \nSiz bunday degan bo`lishingiz mumkin 'cars' aslida 'car' orqali topasiz.")
 
+@dp.inline_handler()
+async def inline_echo(inline_query: InlineQuery):
+    text = inline_query.query or 'nimadir xato ketdi'
+    lookap = getDefinitions(text)
+    if lookap:
+        text = lookap['definitions']
+    else:
+        text = "xatolik"
+    input_content = InputTextMessageContent(text)
+    result_id: str = hashlib.md5(text.encode()).hexdigest()
+    item = InlineQueryResultArticle(
+        id=result_id,
+        title=f'Definitions {text}',
+        input_message_content=input_content,
+    )
+    await bot.answer_inline_query(inline_query.id, results=[item], cache_time=1)
    
 
 if __name__ == '__main__':
