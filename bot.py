@@ -1,5 +1,6 @@
 import logging
 import hashlib
+from traceback import print_tb
 from googletrans import Translator
 from aiogram import Bot, Dispatcher, executor, types
 from oxford import getDefinitions
@@ -61,11 +62,11 @@ async def inline_echo(inline_query: InlineQuery):
         text = lookup['definitions']
     else:
         text = "topilmadi"
-    input_content = InputTextMessageContent(text)
+    input_content = InputTextMessageContent(f"word:{inline_search}\nDefinitions:\n{text}")
     result_id: str = hashlib.md5(text.encode()).hexdigest()
     item = InlineQueryResultArticle(
         id=result_id,
-        title=f'word: {inline_search}\nDefinitions {text}',
+        title=text,
         input_message_content=input_content,
     )
     await bot.answer_inline_query(inline_query.id, results=[item])

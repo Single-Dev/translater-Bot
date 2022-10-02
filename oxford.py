@@ -31,4 +31,5 @@ if __name__ == '__main__':
 
 
 
-
+def getInlineDefinitions(search_query):
+    pass
