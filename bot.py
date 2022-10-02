@@ -54,17 +54,18 @@ async def tarjimon(message: types.Message):
 
 @dp.inline_handler()
 async def inline_echo(inline_query: InlineQuery):
-    text = inline_query.query or 'nimadir xato ketdi'
-    lookap = getDefinitions(text)
+    inline_search = inline_query.query
+    res = translater.translate(inline_search, dest="en").text
+    lookap = getDefinitions(res)
     if lookap:
-        text = lookap['definitions']
+        res = lookap['definitions']
     else:
-        text = "xatolik"
-    input_content = InputTextMessageContent(text)
-    result_id: str = hashlib.md5(text.encode()).hexdigest()
+        res = "topilmadi"
+    input_content = InputTextMessageContent(res)
+    result_id: str = hashlib.md5(res.encode()).hexdigest()
     item = InlineQueryResultArticle(
         id=result_id,
-        title=f'Definitions {text}',
+        title=f'Definitions {res}',
         input_message_content=input_content,
     )
     await bot.answer_inline_query(inline_query.id, results=[item], cache_time=1)
