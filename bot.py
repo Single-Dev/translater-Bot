@@ -8,8 +8,8 @@ from oxford import getDefinitions
 from aiogram.types import InlineQuery, InputTextMessageContent, InlineQueryResultArticle
 
 translater = Translator()
-# API_TOKEN = '5347442866:AAHHXVNR2L_VFFaIR7ejq43yPXhmR_fmJ9c'
-API_TOKEN = '5401595436:AAEvFO1a0z7Xv2AN6hV0VWJU4XTuKEulYF4'
+API_TOKEN = '5347442866:AAHHXVNR2L_VFFaIR7ejq43yPXhmR_fmJ9c'
+# API_TOKEN = '5401595436:AAEvFO1a0z7Xv2AN6hV0VWJU4XTuKEulYF4'
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
