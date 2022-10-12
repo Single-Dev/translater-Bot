@@ -1,11 +1,11 @@
 import logging
 import hashlib
 from time import sleep
-from traceback import print_tb
 from googletrans import Translator
 from aiogram import Bot, Dispatcher, executor, types
 from oxford import getDefinitions
 from aiogram.types import InlineQuery, InputTextMessageContent, InlineQueryResultArticle
+
 
 translater = Translator()
 API_TOKEN = '5347442866:AAHHXVNR2L_VFFaIR7ejq43yPXhmR_fmJ9c'
