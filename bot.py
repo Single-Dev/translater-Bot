@@ -3,7 +3,7 @@ import hashlib
 from time import sleep
 from googletrans import Translator
 from aiogram import Bot, Dispatcher, executor, types
-from oxford import getDefinitions
+from oxford import getDefinitions, getInlineDefinitions
 from aiogram.types import InlineQuery, InputTextMessageContent, InlineQueryResultArticle
 
 
@@ -59,10 +59,10 @@ async def tarjimon(message: types.Message):
             await message.reply(f"qidirligan so`z: {word_id}\nBunday Soz Topilmadi 😕 \nSiz bunday degan bo`lishingiz mumkin 'cars' aslida 'car' orqali topasiz.")
 
 @dp.inline_handler()
-async def inline_echo(inline_query: InlineQuery):
+async def inline(inline_query: InlineQuery):
     inline_search = inline_query.query
     text = translater.translate(inline_search, dest="en").text
-    lookup = getDefinitions(text)
+    lookup = getInlineDefinitions(text)
     if lookup:
         text = lookup['definitions']
     else:
