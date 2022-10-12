@@ -8,8 +8,8 @@ from aiogram.types import InlineQuery, InputTextMessageContent, InlineQueryResul
 
 
 translater = Translator()
-API_TOKEN = '5347442866:AAHHXVNR2L_VFFaIR7ejq43yPXhmR_fmJ9c'
-# API_TOKEN = '5401595436:AAEvFO1a0z7Xv2AN6hV0VWJU4XTuKEulYF4'
+# API_TOKEN = '5347442866:AAHHXVNR2L_VFFaIR7ejq43yPXhmR_fmJ9c'
+API_TOKEN = '5567666571:AAHtd55YKgj6M5xEPbpvL4UmxUkloVj0aGE'
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -22,10 +22,10 @@ dp = Dispatcher(bot)
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
     await message.answer("Salom bu bot orqali gaplarni tarjima qilishingiz so`zlar haqida ma'lumotlar olishingiz mumkin va inglizcha ko`p so`zlarni qanday talafuz qilinishini ham o`rganishingiz mumkin")
-    mb=100
-    for i in range(mb):
-        sleep(0.5)
-        await message.answer(f"{i/mb*100:.1f} % shuncha yuklandi.", end=message.delete)
+    # mb=100
+    # for i in range(mb):
+    #     sleep(0.5)
+    #     await message.answer(f"{i/mb*100:.1f} % shuncha yuklandi.", end=message.delete)
 
 @dp.message_handler(commands=['help'])
 async def send_welcome(message: types.Message):
