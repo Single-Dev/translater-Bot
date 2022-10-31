@@ -2,5 +2,13 @@
   "name": "Python bot",
   "description": "By aiogram",
   "repository": "https://github.com/Bekzodbek2006/translater-Bot/",
-  "keywords": ["python", "heroku"]
+  "keywords": ["python", "heroku"],
+  "env": {
+    "BOT_TOKEN": {
+      "description": "Get from Telegram Botfather"
+    },
+    "USER_ID": {
+      "description": "get from telegram get_id_bot"
+    }
+  }
 }
