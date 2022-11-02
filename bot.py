@@ -8,8 +8,7 @@ from aiogram.types import InlineQuery, InputTextMessageContent, InlineQueryResul
 
 
 translater = Translator()
-API_TOKEN = '5347442866:AAEbThSlucl31cjTEdZbRfbFvh9XNO6nuvE'
-# API_TOKEN = '5567666571:AAHtd55YKgj6M5xEPbpvL4UmxUkloVj0aGE'
+API_TOKEN = 'Your Bot Token Here'
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
