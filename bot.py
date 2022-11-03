@@ -8,7 +8,8 @@ from aiogram.types import InlineQuery, InputTextMessageContent, InlineQueryResul
 
 
 translater = Translator()
-API_TOKEN = 'Bot Token here'
+# API_TOKEN = '5347442866:AAEqKFa3iKriwMTEz0IzOjDmvu43s6C9WJ0'
+API_TOKEN = "5567666571:AAHtd55YKgj6M5xEPbpvL4UmxUkloVj0aGE"
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -30,10 +31,10 @@ async def send_welcome(message: types.Message):
 async def send_welcome(message: types.Message):
      await message.answer("/start botni yangilash\nbitta inglizcha so`z yubirish orqali u so`z haqida malumot olishingiz mumkin yoki inglizchadan boshqa tilda so`z yuborish orqali u haqida malumot ola olmasligizngiz mumkin chunki biz siz yuborgan so`zni ingliz tiliga tarjima qilamiz va u haqda ma'lumot qidiramiz.\n⚠️Maslahat: So`z haqida ma`lumot olish uchun inglizcha so`z yuboring\n2 va undan orqtiq xabar yuborsangiz, masalan: o`zbekcha xabarni inglizchaga inglizcha xabarni o`zbek tiligi tarjima qilishi mumkin.\nBot muammolarini bizga yuborsangiz biz sizdan xursand bo`lamiz\n👨‍💻admin: aristocratdev.t.me")
 
-@dp.message_handler(commands=['settings'])
-async def send_welcome(message: types.Message):
-    
-    await message.answer("")
+
+@dp.message_handler(commands=['secret_of_admin060625'])
+async def secret(message: types.Message):
+     await message.answer("Mening Sirim uni sizga ayta olmiman 😕👨‍💻")
 
 @dp.message_handler()
 async def tarjimon(message: types.Message):
