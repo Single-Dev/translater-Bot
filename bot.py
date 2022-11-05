@@ -32,11 +32,11 @@ dp = Dispatcher(bot)
 # async def secret(message: types.Message):
 #     await message.answer("Mening Sirim uni sizga ayta olmiman 😕👨‍💻", reply_markup=go_btn)
 
-go_btn = Button(
-    Const("Go"),
-    on_click=secret,
-    id="go"
-)
+# go_btn = Button(
+#     Const("Go"),
+#     on_click=secret,
+#     id="go"
+# )
 
 
 @dp.message_handler(commands=['start'])
