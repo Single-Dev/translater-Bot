@@ -9,7 +9,7 @@ from aiogram.types import InlineQuery, InputTextMessageContent, InlineQueryResul
 
 translater = Translator()
 API_TOKEN = '5347442866:AAEqKFa3iKriwMTEz0IzOjDmvu43s6C9WJ0'
-# API_TOKEN = "5567666571:AAHtd55YKgj6M5xEPbpvL4UmxUkloVj0aGE"
+# API_TOKEN = "5567666571:AAHH_3xSDeeZYbi9vHLrdhISFEnA7a4BURU"
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -41,8 +41,10 @@ async def tarjimon(message: types.Message):
     lang = translater.detect(message.text).lang
     if len(message.text.split()) >= 2:
         dest='uz' if lang == "en" else 'en'
-        await message.reply(translater.translate(message.text, dest).text)
+        await message.reply(f"{lang} - {dest}\n{translater.translate(message.text, dest).text}")
     else:
+        dest='uz' if lang == "en" else 'en'
+        await message.reply(f"{lang} - {dest}\n{translater.translate(message.text, dest).text}")
         if lang == "en":
             word_id = message.text
         else:
@@ -56,7 +58,7 @@ async def tarjimon(message: types.Message):
             if lookup.get("audio"):
                 await message.reply_voice(lookup['audio'])
         else:
-            await message.reply(f"qidirligan so`z: {word_id}\nBunday Soz Topilmadi 😕 \nSiz bunday degan bo`lishingiz mumkin 'cars' aslida 'car' orqali topasiz.")
+            await message.reply(f"{word_id} Bo'yicha Malumotlar Topilmadi")
 
 @dp.inline_handler()
 async def inline(inline_query: InlineQuery):
