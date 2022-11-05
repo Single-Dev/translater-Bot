@@ -28,9 +28,9 @@ dp = Dispatcher(bot)
 # async def go_clicked(c: CallbackQuery, button: Button, manager: DialogManager):
 #     await c.message.answer("Going on!")
 
-@dp.message_handler(commands=['secret_of_admin060625'])
-async def secret(message: types.Message):
-    await message.answer("Mening Sirim uni sizga ayta olmiman 😕👨‍💻", reply_markup=go_btn)
+# @dp.message_handler(commands=['secret_of_admin060625'])
+# async def secret(message: types.Message):
+#     await message.answer("Mening Sirim uni sizga ayta olmiman 😕👨‍💻", reply_markup=go_btn)
 
 go_btn = Button(
     Const("Go"),
