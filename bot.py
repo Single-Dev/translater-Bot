@@ -50,8 +50,6 @@ async def send_help(message: types.Message):
      await message.answer("Botdagi Muammonni Menga Yuboring.", reply_markup=btn.admin_btn)
 
 
-
-
 @dp.message_handler()
 async def tarjimon(message: types.Message):
     lang = translater.detect(message.text).lang
