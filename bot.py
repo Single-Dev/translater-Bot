@@ -3,7 +3,7 @@ import hashlib
 from time import sleep
 from googletrans import Translator
 from aiogram import Bot, Dispatcher, executor, types
-from oxford import getDefinitions, getInlineDefinitions
+from oxford import getDefinitions   
 from aiogram.types import InlineQuery, InputTextMessageContent, InlineQueryResultArticle, CallbackQuery
 
 # for btn
@@ -25,23 +25,21 @@ logging.basicConfig(level=logging.INFO)
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
-# async def go_clicked(c: CallbackQuery, button: Button, manager: DialogManager):
-#     await c.message.answer("Going on!")
+async def go_clicked(c: CallbackQuery, button: Button, manager: DialogManager):
+    await c.message.answer("Going on!")
 
-# @dp.message_handler(commands=['secret_of_admin060625'])
-# async def secret(message: types.Message):
-#     await message.answer("Mening Sirim uni sizga ayta olmiman 😕👨‍💻", reply_markup=go_btn)
 
-# go_btn = Button(
-#     Const("Go"),
-#     on_click=secret,
-#     id="go"
-# )
 
+
+go_btn = Button(
+    Const("Go"),
+    on_click=go_clicked,
+    id="go"
+)
 
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
-    await message.answer("Salom bu bot orqali gaplarni tarjima qilishingiz so`zlar haqida ma'lumotlar olishingiz mumkin va inglizcha ko`p so`zlarni qanday talafuz qilinishini ham o`rganishingiz mumkin")
+    await message.answer("Salom bu bot orqali gaplarni tarjima qilishingiz so`zlar haqida ma'lumotlar olishingiz mumkin va inglizcha ko`p so`zlarni qanday talafuz qilinishini ham o`rganishingiz mumkin",)
 
     
 
@@ -55,10 +53,11 @@ async def tarjimon(message: types.Message):
     lang = translater.detect(message.text).lang
     if len(message.text.split()) >= 2:
         dest='uz' if lang == "en" else 'en'
-        await message.reply(f"{lang} - {dest}\n{translater.translate(message.text, dest).text}")
+        # await message.reply(f"{lang} - {dest}\n{translater.translate(message.text, dest).text}")
+        await message.reply(translater.translate(message.text, dest).text)
     else:
         dest='uz' if lang == "en" else 'en'
-        await message.reply(f"{lang} - {dest}\n{translater.translate(message.text, dest).text}")
+        await message.reply(translater.translate(message.text, dest).text)
         sleep(1)
         if lang == "en":
             word_id = message.text
@@ -72,27 +71,38 @@ async def tarjimon(message: types.Message):
                 await message.reply(f"so`z: {word_id}\nMa'lumotlar:\n{translater.translate(lookup['definitions'], dest='uz' ).text}\n")
             if lookup.get("audio"):
                 await message.reply_voice(lookup['audio'])
-        else:
-            await message.answer(f"{word_id} Bo'yicha Malumotlar Topilmadi")
+        # else:
+            # await message.answer(f"{word_id} Bo'yicha Malumotlar Topilmadi")
 
 @dp.inline_handler()
 async def inline(inline_query: InlineQuery):
     inline_search = inline_query.query
-    text = translater.translate(inline_search, dest="en").text
-    lookup = getInlineDefinitions(text)
-    if lookup:
-        text = lookup['definitions']
-    else:
-        text = "topilmadi"
-    input_content = InputTextMessageContent(f"word:{inline_search}\nDefinitions:\n{text}")
+    lang = translater.detect(inline_search).lang
+    dest='uz' if lang == "en" else 'en'
+    text = translater.translate(inline_search, dest).text
+    trans_input_content = InputTextMessageContent(text)
+
     result_id: str = hashlib.md5(text.encode()).hexdigest()
     item = InlineQueryResultArticle(
         id=result_id,
         title=text,
-        input_message_content=input_content,
+        input_message_content=trans_input_content,
     )
     await bot.answer_inline_query(inline_query.id, results=[item])
-   
+    # text_1 = translater.translate(inline_search, dest="en").text
+    # lookup = getInlineDefinitions(text_1)
+    # if lookup:
+    #     text_1 = lookup['definitions']
+    # else:
+    #     text_1 = "topilmadi"
+    # input_content = InputTextMessageContent(f"word:{inline_search}\nDefinitions:\n{text_1}")
+    # result_id_1: str = hashlib.md5(text_1.encode()).hexdigest()
+    # item_1 = InlineQueryResultArticle(
+    #     id=result_id_1,
+    #     title=text_1,
+    #     input_message_content=input_content,
+    # )
+    # await bot.answer_inline_query(inline_query.id, results=[item_1])
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)

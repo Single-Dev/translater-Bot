@@ -28,18 +28,18 @@ def getDefinitions(word_id):
 
 
 
-def getInlineDefinitions(search_query):
-    url = "https://od-api.oxforddictionaries.com:443/api/v2/entries/" + language + "/" + search_query.lower()
-    r = requests.get(url, headers={"app_id": app_id, "app_key": app_key}) 
-    res = r.json()
-    inline_reply = {}
-    inline_senes = res['results'][0]['lexicalEntries'][0]['entries'][0]['senses']
-    malumotlar = []
-    for inline_ses in inline_senes:
-        malumotlar.append(f"👉: {inline_ses['definitions'][0]}")
-    inline_reply['definitions'] = "\n".join(malumotlar)
-    return inline_reply
+# def getInlineDefinitions(search_query):
+#     url = "https://od-api.oxforddictionaries.com:443/api/v2/entries/" + language + "/" + search_query.lower()
+#     r = requests.get(url, headers={"app_id": app_id, "app_key": app_key}) 
+#     res = r.json()
+#     inline_reply = {}
+#     inline_senes = res['results'][0]['lexicalEntries'][0]['entries'][0]['senses']
+#     malumotlar = []
+#     for inline_ses in inline_senes:
+#         malumotlar.append(f"👉{inline_ses['definitions'][0]}")
+#     inline_reply['definitions'] = "\n".join(malumotlar)
+#     return inline_reply
     
-if __name__ == '__main__':
-    from pprint import pprint as print
-    print(getInlineDefinitions("america"))
+# if __name__ == '__main__':
+#     from pprint import pprint as print
+#     print(getInlineDefinitions("america"))
