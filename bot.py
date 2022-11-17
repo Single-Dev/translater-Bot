@@ -15,7 +15,7 @@ from aiogram_dialog.widgets.text import Const
 
 
 translater = Translator()
-API_TOKEN = 'Bot token here'
+API_TOKEN = 'Bot token '
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
