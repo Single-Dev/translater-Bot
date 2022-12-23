@@ -15,7 +15,7 @@ from aiogram_dialog.widgets.text import Const
 
 
 translater = Translator()
-API_TOKEN = 'Bot token '
+API_TOKEN = '5347442866:AAEqKFa3iKriwMTEz0IzOjDmvu43s6C9WJ0'
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -104,4 +104,4 @@ async def inline(inline_query: InlineQuery):
     # await bot.answer_inline_query(inline_query.id, results=[item_1])
 
 if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True)
+    executor.start_polling(dp, skip_updates=False)
